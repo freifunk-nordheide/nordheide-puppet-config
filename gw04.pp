@@ -32,13 +32,13 @@ ffnord::mesh { 'mesh_ffnh':
   , mesh_mtu     => "1280"
   , mesh_peerings    => "/root/mesh_peerings.yaml"      # path to the local peerings description yaml file
 
-  , fastd_secret => "/root/04gw-fastd-secrect.key"
+  , fastd_secret => "/root/04gw-fastd-secret.key"
   , fastd_port   => 10050
   , fastd_peers_git => 'https://github.com/freifunk-nordheide/nordheide-peers.git'      # this will be pulled automatically during puppet apply
 
   , dhcp_ranges => ['10.71.7.2 10.71.8.254']    # the whole net is 10.71.0.0 - 10.71.63.255
                                                 # so take one 32rd of this range but don't give out the ip of the gw itself
-  , dns_servers => ['10.71.0.1']                # should be the same as $router_id
+  , dns_servers => ['10.71.7.1']                # should be the same as $router_id
 }
 
 class {'ffnord::vpn::provider::pia':

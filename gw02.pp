@@ -38,7 +38,7 @@ ffnord::mesh { 'mesh_ffnh':
 
   , dhcp_ranges => ['10.71.3.2 10.71.4.254']    # the whole net is 10.71.0.0 - 10.71.63.255
                                                 # so take one 32rd of this range but don't give out the ip of the gw itself
-  , dns_servers => ['10.71.0.1']                # should be the same as $router_id
+  , dns_servers => ['10.71.3.1']                # should be the same as $router_id
 }
 
 class {'ffnord::vpn::provider::pia':

@@ -23,9 +23,9 @@ ffnord::mesh { 'mesh_ffnh':
     mesh_name => "Freifunk Nordheide"
   , mesh_code => "ffnh"
   , mesh_as => "64889"
-  , mesh_mac  => "fe:ed:be:ef:ff:00"
-  , vpn_mac  => "fe:ed:be:ff:ff:00"
-  , mesh_ipv6 => "fd8f:14c7:d318::/64"
+  , mesh_mac  => "fe:ed:be:ef:ff:02"
+  , vpn_mac  => "fe:ed:be:ff:ff:02"
+  , mesh_ipv6 => "fd8f:14c7:d318::ff02/64"
   , mesh_ipv4  => "10.71.3.1/19"        # ipv4 address of mesh device in cidr notation, e.g. 10.35.0.1/19
   , range_ipv4 => "10.71.0.0/18"        # ipv4 range allocated to community, this might be different to
                                         # the one used in the mesh in cidr notation, e.g. 10.35.0.1/18

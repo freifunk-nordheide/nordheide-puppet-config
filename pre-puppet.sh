@@ -5,11 +5,11 @@
 
 NAME="Freifunk Nordheide"
 OPERATOR="heini66"
-HOST_PREFIX="gw-"
+HOST_PREFIX="gw"
 SUBDOMAIN_PREFIX=vpn
-VPN_NUMBER=11
+VPN_NUMBER=02
 DOMAIN="nordheide.freifunk.net"
-SUDOUSERNAME="debian"
+SUDOUSERNAME="freifunker"
 TLD=ffnh
 
 #backborts einbauen
@@ -67,7 +67,6 @@ cat <<-EOF>> /root/.bashrc
   alias l='ls \$LS_OPTIONS -lA'
   alias grep="grep --color=auto"
   # let us only use aptitude on gateways
-  alias apt-get='sudo aptitude'
   alias ..="cd .."
   # set nano to (S=)smooth scrolling and (i=)autoindent (T=)2 tabs (E=)as spaces
   alias nano='nano -S -i -T2 -E'
@@ -85,9 +84,9 @@ modprobe ip_conntrack
 echo ip_conntrack >> /etc/modules
 
 #SSH config
-rm /etc/ssh/sshd_config
-cp /opt/nordheide-puppet-config/sshd_config /etc/ssh/sshd_config
-service sshd restart
+#rm /etc/ssh/sshd_config
+#cp /opt/nordheide-puppet-config/sshd_config /etc/ssh/sshd_config
+#service sshd restart
 
 #online script
 touch /usr/local/bin/online
@@ -96,21 +95,6 @@ cat <<-EOF>> /usr/local/bin/online
 maintenance off && service ntp start && batctl -m bat-ffnord gw server 100000/100000 && check-services
 EOF
 chmod +x /usr/local/bin/online
-
-#OVH network config
-cat <<-EOF>> /etc/network/interfaces
-iface eth0 inet6 static
-       address 2001:41d0:401:2000::2:f0bd
-       netmask 128
-       post-up /sbin/ip -6 route add 2001:41d0:401:2000::1 dev eth0
-       post-up /sbin/ip -6 route add default via 2001:41d0:401:2000::1 dev eth0
-       pre-down /sbin/ip -6 route del default via 2001:41d0:401:2000::1 dev eth0
-       pre-down /sbin/ip -6 route del 2001:41d0:401:2000::1 dev eth0
-auto eth1
-allow-hotplug eth1
-iface eth1 inet dhcp
-EOF
-
 
 #USER TODO:
 echo 'now copy the files manifest.pp and mesh_peerings.yaml to /root and make sure /root/fastd_secret.key exists'

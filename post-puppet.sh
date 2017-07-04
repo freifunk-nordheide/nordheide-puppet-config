@@ -1,59 +1,35 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-VPN_NUMBER="00"
-#DOMAIN=nord.freifunk.net
-TLD=ffnh
+VPN_NUMBER=11
+DOMAIN=nordheide.freifunk.net
+TLD=ffnord
 IP6PREFIX=fd8f:14c7:d318
 
-#NGINX, if needed to serve the firmware for the auto-updater
-#apt-get install -y nginx
+# alfred fix for /bin/sh
+sed -i 's/( //;s/ )//g' /etc/ffnord
+service alfred restart
+cd
+puppet apply --verbose $VPN_NUMBER.gateway.pp
+sed -i 's/( //;s/ )//g' /etc/ffnord
 
-#mkdir /opt/www
-#sed s~"usr/share/nginx/www;"~"opt/www;"~g -i /etc/nginx/sites-enabled/default
+# firewall config
+build-firewall
 
-#DNS Server
-#sed -i .bak "/eth0 inet static/a \  dns-search vpn$VPN_NUMBER.$DOMAIN" /etc/network/interfaces
+#fastd ovh config
+cd /etc/fastd/ffnord-mvpn/
+git clone https://github.com/freifunk-nordheide/nordheide-gw-peers-ovh backbone
+touch /usr/local/bin/update-fastd-gw
+cat <<-EOF>> /usr/local/bin/update-fastd-gw
+#!/bin/bash
 
-#rm /etc/resolv.conf
-#cat >> /etc/resolv.conf <<-EOF
-#  domain $TLD
-#  search $TLD
-#  nameserver 127.0.0.1
-#  nameserver 62.141.32.5
-#  nameserver 62.141.32.4
-#  nameserver 62.141.32.3
-#  nameserver 8.8.8.8
-#EOF
-
-mv /etc/radvd.conf /etc/radvd.conf.bak
-cat >> /etc/radvd.conf << EOF
-# managed for interface br-$TLD
-interface br-$TLD
-{
- AdvSendAdvert on;
- AdvDefaultLifetime 0; # New
- IgnoreIfMissing on;
- MaxRtrAdvInterval 200;
-
- prefix $IP6PREFIX:0000:0000:0000:0000:0000/64
- {
-   AdvPreferredLifetime 14400; # New
-   AdvValidLifetime 86400; # New
- };
- RDNSS $IP6PREFIX::fd$VPN_NUMBER
- {
- };
-
- route fc00::/7  # this block
- {
-   AdvRouteLifetime 1200;
- };
-};
+cd /etc/fastd/ffnord-mvpn/backbone
+git pull -q
 EOF
-cp /etc/radvd.conf /etc/radvd.conf.d/interface-br-$TLD.conf
+chmod +x /usr/local/bin/update-fastd-gw
 
 # check if everything is running:
-service fastd restart
-service isc-dhcp-server restart
-ln -s /etc/puppet/modules/ffnord/files/usr/local/bin/check-services /root/check-services
+check-services
+echo 'maintenance off if needed !'
+echo 'adapt hostname in the OVH-template /etc/cloud/templates/hosts.debian.tmpl and reboot'
+echo 'add "include peers from "nord-gw-peers-ovh";" to fastd.conf'

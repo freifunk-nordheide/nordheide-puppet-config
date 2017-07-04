@@ -1,7 +1,7 @@
 #!/bin/bash
 #https://github.com/ffnord/ffnord-puppet-gateway
 
-VPN_NUMBER=02
+VPN_NUMBER=03
 DOMAIN=nordheide.freifunk.net
 TLD=ffnh
 IP6PREFIX=fd8f:14c7:d318

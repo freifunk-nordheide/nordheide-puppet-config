@@ -30,9 +30,9 @@ ffnord::mesh { 'mesh_ffnh':
   , range_ipv4 => "10.71.0.0/18"        # ipv4 range allocated to community, this might be different to
                                         # the one used in the mesh in cidr notation, e.g. 10.35.0.1/18
   , mesh_mtu     => "1406"
-  , mesh_peerings    => "/root/mesh_peerings.yaml"      # path to the local peerings description yaml file
+  , mesh_peerings    => "/opt/nordheide-puppet-config/mesh_peerings.yaml"      # path to the local peerings description yaml file
 
-  , fastd_secret => "/root/03gw-fastd-secret.key"
+  , fastd_secret => "/opt/nordheide-puppet-config/03gw-fastd-secret.key"
   , fastd_port   => 10050
   , fastd_peers_git => 'https://github.com/freifunk-nordheide/nordheide-peers.git'      # this will be pulled automatically during puppet apply
 

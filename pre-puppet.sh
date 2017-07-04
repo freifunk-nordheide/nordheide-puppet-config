@@ -34,7 +34,7 @@ hostname $HOST_PREFIX$VPN_NUMBER
 #echo "127.0.1.1 $SUBDOMAIN_PREFIX$VPN_NUMBER.$DOMAIN $HOST_PREFIX$VPN_NUMBER" >>/etc/hosts
 rm /etc/hostname
 touch /etc/hostname
-echo "$HOST_PREFIX$VPN_NUMBER" >>/etc/hostname
+echo "VPN_NUMBER$HOST_PREFIX" >>/etc/hostname
 
 # install needed packages
 apt-get -y install sudo apt-transport-https git nload
@@ -83,16 +83,11 @@ echo load the ip_tables and ip_conntrack module
 modprobe ip_conntrack
 echo ip_conntrack >> /etc/modules
 
-#SSH config
-#rm /etc/ssh/sshd_config
-#cp /opt/nordheide-puppet-config/sshd_config /etc/ssh/sshd_config
-#service sshd restart
-
 #online script
 touch /usr/local/bin/online
 cat <<-EOF>> /usr/local/bin/online
 #!/bin/bash
-maintenance off && service ntp start && batctl -m bat-ffnord gw server 100000/100000 && check-services
+maintenance off && service ntp start && batctl -m bat-ffnh gw server 100000/100000 && check-services
 EOF
 chmod +x /usr/local/bin/online
 

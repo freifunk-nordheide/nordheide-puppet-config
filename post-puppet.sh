@@ -6,10 +6,6 @@ DOMAIN=nordheide.freifunk.net
 TLD=ffnh
 IP6PREFIX=fd8f:14c7:d318
 
-cd
-puppet apply --verbose $VPN_NUMBER.gateway.pp
-sed -i 's/( //;s/ )//g' /etc/ffnord
-
 # firewall config
 build-firewall
 

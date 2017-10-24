@@ -29,7 +29,7 @@ ffnord::mesh { 'mesh_ffnh':
   , mesh_ipv4  => "10.71.0.1/19"	# ipv4 address of mesh device in cidr notation, e.g. 10.35.0.1/19
   , range_ipv4 => "10.71.0.0/18"	# ipv4 range allocated to community, this might be different to
 					# the one used in the mesh in cidr notation, e.g. 10.35.0.1/18
-  , mesh_mtu     => "1406"
+  , mesh_mtu     => "1374"
   , mesh_peerings    => "/root/mesh_peerings.yaml"	# path to the local peerings description yaml file
 
   , fastd_secret => "/root/01gw-fastd-secret.key"	

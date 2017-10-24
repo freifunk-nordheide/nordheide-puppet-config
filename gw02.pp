@@ -33,7 +33,7 @@ ffnord::mesh {
   , mesh_ipv6       => "fd8f:14c7:d318::ff02/64"
   , mesh_ipv4       => "10.71.3.1/19"
   , range_ipv4      => "10.71.0.0/18"
-  , mesh_mtu        => "1406"
+  , mesh_mtu        => "1374"
   , mesh_peerings   => "/root/mesh_peerings.yaml"
 
   , fastd_secret    => "/root/02gw-fastd-secrect.key"

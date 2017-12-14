@@ -41,13 +41,6 @@ ffnord::mesh { 'mesh_ffnh':
   , dns_servers => ['10.71.7.1']                # should be the same as $router_id
 }
 
-class {'ffnord::vpn::provider::pia':
-  openvpn_server => "germany.privateinternetaccess.com",
-  openvpn_port   => 3478,
-  openvpn_user   => "xxxxxx",
-  openvpn_password => "xxxxxxxxxxxx";
-}
-
 ffnord::named::zone {
   "ffnh": zone_git => "https://github.com/freifunk-nordheide/nordheide-zone.git", exclude_meta => 'nordheide';
 }

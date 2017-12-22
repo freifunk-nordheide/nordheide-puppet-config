@@ -25,4 +25,4 @@ chmod +x /usr/local/bin/update-fastd-gw
 check-services
 echo 'maintenance off if needed !'
 echo 'adapt hostname in the OVH-template /etc/cloud/templates/hosts.debian.tmpl and reboot'
-echo 'add "include peers from "nord-gw-peers-ovh";" to fastd.conf'
+echo 'add "include peers from "nordheide-gw-peers-ovh";" to fastd.conf'

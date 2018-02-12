@@ -27,12 +27,12 @@ EOF
 
 
 # TODO
-# Remove matchings lines from /etc/network/interfaces.d/ffnord-bridge, remove pre-up, post-up and post-down line.
-# nano /etc/network/interfaces.d/ffnord-bridge
+# Remove matchings lines from /etc/network/interfaces.d/ffnh-bridge, remove pre-up, post-up and post-down line.
+# nano /etc/network/interfaces.d/ffnh-bridge
 
 # remove check-gateway crontab
 # disable vpn-watchdogs
 
 # reboot machine and run:
-# maintenance off && service ntp start && batctl -m bat-ffnord gw server 100/100 && check-services
+# maintenance off && service ntp start && batctl -m bat-ffnh gw server 1000/1000 && check-services
 

@@ -48,7 +48,7 @@ apt-get -y remove nginx nginx-full exim mutt
 #puppet modules install
 apt-get -y install --no-install-recommends puppet
 puppet module install puppetlabs-stdlib --version 4.15.0 && \
-puppet module install puppetlabs-apt --version 1.5.1 && \
+puppet module install puppetlabs-apt --version 1.5.2 && \
 puppet module install puppetlabs-vcsrepo --version 1.3.2 && \
 puppet module install saz-sudo --version 4.1.0 && \
 puppet module install torrancew-account --version 0.1.0

@@ -3,6 +3,7 @@
 ## First, make shure your system is debian jessie, system ist up to date. git has to be installed.
 ## A screen session is required. 
 add actual pgp key for fastd ( puppet apply will fail without )
+apt-key adv --recv-keys --keyserver keys.gnupg.net 16EF3F64CB201D9C
 
 ### 1. change to /opt
     cd /opt
